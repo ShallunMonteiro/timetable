@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script type="module">
+    import {gatah,reach,tft} from "/g/modules/mind.js";
+    window.goto=gatah;
+    window.tbw=tft;
+    window.rch=reach;
+    window.n=new Date().getDay();
+    window.flag=false;
+</script>
+<script src="https://d3js.org/d3.v5.js"></script>
+<script language="javascript" >
+    async function f()
+    {
+    var temp=new Date().getTime();
+    await d3.csv("./TimeTable.csv?"+temp).then(function(data){ttd=data;});
+    await d3.csv("./lec_time.csv?"+temp).then(function(data2){tm=data2;});
+    await d3.csv("./lec_lnks.csv?"+temp).then(function(data3){lnk=data3});
+    for(var i=0;i<lnk.length;i++)
+    {
+        window[lnk[i].Initials]=lnk[i].Link;
+    }
+    
+    for(var i=0;i<tm.length;i++)
+    {
+        var st=tm[i]['Start_Time'];
+        var et=tm[i]['End_Time'];
+        if(st>=et){
+            
+            
+            
+            if(st!=0){
+                erc="e1"
+                window.name="The Start time given for "+i+"th "+"record is greater than the endtime provided in lec_time.csv";
+            }
+            else{
+                erc="e2"
+                window.name="The End time is not given for "+i+"th record in lec_time.csv";
+            }
+            rch("/g/tterr.html");
+        }
+        window['l'+(i+1)+'s']=st;
+        window['l'+(i+1)+'e']=et;
+    }
+    
+    for(var i=1;i<ttd.columns.length;i++)
+    {
+        if(tbw(goto('l'+i+'s'),goto('l'+i+'e')))
+        {
+            v1=ttd[n]["L"+i];
+            if(goto(v1)===undefined){
+                rch("/g");
+            }
+            else
+            {
+                document.write(String.raw`<a style="cursor: pointer" onclick="javascript: window.location = '${goto(v1)}';">Omprakash</a>`);
+            }
+            
+            window.flag=true;
+        }}
+    if(flag==false){}
+    }
+    </script>
+</head>
+<body onload="f()">
+</body>
+</html>
