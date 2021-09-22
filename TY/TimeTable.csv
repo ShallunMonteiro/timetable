@@ -1,8 +1,8 @@
 Week_Day,L1,L2,L3,L4,L5,L6
 Sunday,,,,,,
 Monday,,DN,,SN,SN,SN
-Tuesday,,,,,,
-Wednesday,,,,,,
-Thursday,,,,,,
-Friday,,,,,,
-Saturday,,,,,,
+Tuesday,SB,SB,SB,DN,SN,SN
+Wednesday,SB,SB,SB,KB,KB,
+Thursday,,SB,SB,DN,DN,DN
+Friday,KB,KB,KB,SB,SB,
+Saturday,,,,,SB,SB
